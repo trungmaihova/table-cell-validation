@@ -15,69 +15,66 @@
 				<p:growl id="msgs" showDetail="true" />
 
 				<div class="card">
-					<h5>Cell Editing with Double Click Event (dblclick)</h5>
+					<h5>Custom validator</h5>
 					<p:dataTable id="products3" var="product"
 						value="#{data.bean.products}" editable="true" editMode="cell"
-						widgetVar="cellCars2" editInitEvent="dblclick"
+						widgetVar="cellCars2" rowIndexVar="rowIndex"
 						style="margin-bottom:20px">
 
-						<p:ajax event="cellEdit" listener="#{data.bean.onCellEdit}"
-							update=":form:msgs" />
-
 						<p:column headerText="Code">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{product.code}" />
-								</f:facet>
-								<f:facet name="input">
-									<p:inputText id="modelInput3" value="#{product.code}"
-										style="width:100%" />
-								</f:facet>
-							</p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel value="#{product.code}" />
+							</f:facet>
+							<p:outputPanel id="productCode">
+								<p:inputText id="modelInput" value="#{product.code}">
+									<f:validator validatorId="productCodeValidatorr" />
+								</p:inputText>
+							</p:outputPanel>
+
 						</p:column>
 
 						<p:column headerText="Name">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{product.name}" />
-								</f:facet>
-								<f:facet name="input">
-									<p:inputText value="#{product.name}" style="width:100%"
-										label="Name" />
-								</f:facet>
-							</p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel for="name" value="#{product.name}" />
+							</f:facet>
+							<p:outputPanel id="productName">
+								<p:inputText id="name" value="#{product.name}"
+									style="width:100%" label="Name" />
+							</p:outputPanel>
 						</p:column>
-
 						<p:column headerText="Status">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{product.inventoryStatus}" />
-								</f:facet>
-								<f:facet name="input">
-									<h:selectOneMenu value="#{product.inventoryStatus}"
-										style="width:100%">
-										<f:selectItems value="#{data.bean.inventoryStatusList}"
-											var="status" itemLabel="#{status.text}" itemValue="#{status}" />
-									</h:selectOneMenu>
-								</f:facet>
-							</p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{product.inventoryStatus}" />
+							</f:facet>
+							<p:outputPanel id="productStatus">
+								<h:selectOneMenu id="inventoryStatus"
+									value="#{product.inventoryStatus}" style="width:100%">
+									<f:selectItems value="#{data.bean.inventoryStatusList}"
+										var="status" itemLabel="#{status.text}" itemValue="#{status}" />
+
+								</h:selectOneMenu>
+								<h:message for="inventoryStatus" style="color: red;" />
+							</p:outputPanel>
 						</p:column>
 
 						<p:column headerText="Price">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{product.price}">
-										<f:convertNumber type="currency" currencySymbol="$" />
-									</h:outputText>
-								</f:facet>
-								<f:facet name="input">
-									<p:inputNumber value="#{product.price}" style="width:100%"
-										label="Price" symbol="$" />
-								</f:facet>
-							</p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{product.price}">
+									<f:convertNumber type="currency" currencySymbol="$" />
+								</h:outputText>
+							</f:facet>
+							<p:outputPanel id="productPrice">
+								<p:inputNumber value="#{product.price}" label="Price" symbol="$">
+								</p:inputNumber>
+							</p:outputPanel>
 						</p:column>
 					</p:dataTable>
+					<div class="command-btns">
+						<p:commandButton value="Save" process="@form"
+							actionListener="#{logic.save}" update="@form" />
+					</div>
 				</div>
+
 			</h:form>
 
 		</ui:define>

@@ -48,5 +48,35 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 160 }
       }
+    }, {
+      "id" : "f6",
+      "type" : "HtmlDialogEventStart",
+      "name" : "save",
+      "config" : {
+        "guid" : "190E92FB3E8B59B3"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 272 }
+      },
+      "connect" : { "id" : "f8", "to" : "f7" }
+    }, {
+      "id" : "f7",
+      "type" : "Script",
+      "name" : "save",
+      "config" : {
+        "output" : {
+          "code" : "in.bean.save();"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 240, "y" : 272 }
+      },
+      "connect" : { "id" : "f10", "to" : "f9" }
+    }, {
+      "id" : "f9",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 424, "y" : 272 }
+      }
     } ]
 }
