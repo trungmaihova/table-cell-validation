@@ -1,0 +1,65 @@
+{
+  "format" : "10.0.0",
+  "id" : "190E8B2DEB5F4156",
+  "config" : {
+    "data" : "table.validation.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "start.ivp",
+      "config" : {
+        "callSignature" : "start",
+        "outLink" : "start.ivp",
+        "case" : { }
+      },
+      "visual" : {
+        "at" : { "x" : 56, "y" : 64 }
+      },
+      "connect" : { "id" : "f6", "to" : "f5" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 472, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "DialogCall",
+      "name" : "TableValidation",
+      "config" : {
+        "dialogId" : "table.validation.TableValidation",
+        "startMethod" : "start(com.ivy.investigate.table.ProductBean)",
+        "call" : {
+          "params" : [
+            { "name" : "bean", "type" : "com.ivy.investigate.table.ProductBean" }
+          ],
+          "map" : {
+            "param.bean" : "in.bean"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 344, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f5",
+      "type" : "Script",
+      "name" : "init",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.ivy.investigate.table.ProductBean;",
+            "",
+            "in.bean = new ProductBean();",
+            "in.bean.init();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 184, "y" : 64 }
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    } ]
+}

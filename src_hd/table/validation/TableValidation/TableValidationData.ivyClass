@@ -1,0 +1,4 @@
+TableValidationData #class
+table.validation.TableValidation #namespace
+bean com.ivy.investigate.table.ProductBean #field
+bean PERSISTENT #fieldModifier
