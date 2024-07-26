@@ -48,5 +48,65 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 160 }
       }
+    }, {
+      "id" : "f7",
+      "type" : "Script",
+      "name" : "save",
+      "config" : {
+        "output" : {
+          "code" : "in.bean.saveProducts();"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 280, "y" : 272 }
+      },
+      "connect" : { "id" : "f10", "to" : "f9" }
+    }, {
+      "id" : "f9",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 472, "y" : 272 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "HtmlDialogEventStart",
+      "name" : "saveProducts",
+      "config" : {
+        "guid" : "190ED3EC5C5AE44B"
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 272 }
+      },
+      "connect" : { "id" : "f8", "to" : "f7" }
+    }, {
+      "id" : "f11",
+      "type" : "HtmlDialogEventStart",
+      "name" : "saveProducts2",
+      "config" : {
+        "guid" : "190ED6C816B1D7D1"
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 360 }
+      },
+      "connect" : { "id" : "f13", "to" : "f12" }
+    }, {
+      "id" : "f12",
+      "type" : "Script",
+      "name" : "save",
+      "config" : {
+        "output" : {
+          "code" : "in.bean.saveProducts2();"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 280, "y" : 360 }
+      },
+      "connect" : { "id" : "f15", "to" : "f14" }
+    }, {
+      "id" : "f14",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 472, "y" : 360 }
+      }
     } ]
 }

@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+	xmlns:ic="http://ivyteam.ch/jsf/component"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<cc:interface componentType="IvyComponent">
+	<cc:attribute name="products" required="true" />
+	<cc:attribute name="title" required="true" />
+	<cc:attribute name="validatorId" required="true" />
+</cc:interface>
+
+<cc:implementation>
+	<c:set var="products" value="#{cc.attrs.products}" />
+
+	<div class="card">
+		<h5>#{cc.attrs.title}</h5>
+		<p:dataTable id="products" var="product" value="#{products}"
+			editable="true" editMode="cell" widgetVar="cellCars2"
+			rowIndexVar="rowIndex" style="margin-bottom:20px">
+
+			<p:column headerText="Code">
+				<f:facet name="output">
+					<p:outputLabel value="#{product.code}" />
+				</f:facet>
+				<p:outputPanel id="productCode">
+					<p:inputText id="modelInput" value="#{product.code}">
+						<f:validator validatorId="#{cc.attributes.validatorId}" />
+					</p:inputText>
+				</p:outputPanel>
+			</p:column>
+
+			<p:column headerText="Name">
+				<f:facet name="output">
+					<p:outputLabel for="name" value="#{product.name}" />
+				</f:facet>
+				<p:outputPanel id="productName">
+					<p:inputText id="name" value="#{product.name}" style="width:100%"
+						label="Name" />
+				</p:outputPanel>
+			</p:column>
+
+			<p:column headerText="Price">
+				<f:facet name="output">
+					<h:outputText value="#{product.price}">
+						<f:convertNumber type="currency" currencySymbol="$" />
+					</h:outputText>
+				</f:facet>
+				<p:outputPanel id="productPrice">
+					<p:inputNumber value="#{product.price}" label="Price" symbol="$">
+					</p:inputNumber>
+				</p:outputPanel>
+			</p:column>
+		</p:dataTable>
+	</div>
+
+</cc:implementation>
+</html>
