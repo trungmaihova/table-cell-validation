@@ -10,68 +10,33 @@
 		<ui:define name="title">TableValidation</ui:define>
 		<ui:define name="content">
 
-
-			<h:form id="form">
+			<h:form id="form1">
 				<p:growl id="msgs" showDetail="true" />
-
 				<div class="card">
-					<h5>Custom validator</h5>
-					<p:dataTable id="products3" var="product"
-						value="#{data.bean.products}" editable="true" editMode="cell"
-						widgetVar="cellCars2" rowIndexVar="rowIndex"
-						style="margin-bottom:20px">
 
-						<p:column headerText="Code">
-							<f:facet name="output">
-								<p:outputLabel value="#{product.code}" />
-							</f:facet>
-							<p:outputPanel id="productCode">
-								<p:inputText id="modelInput" value="#{product.code}">
-									<f:validator validatorId="productCodeValidatorr" />
-								</p:inputText>
-							</p:outputPanel>
+					<ic:table.validation.component.TableView
+						validatorId="formUpdatedValidator"
+						title="Validation message show base on form updated"
+						products="#{data.bean.products1}" />
 
-						</p:column>
-
-						<p:column headerText="Name">
-							<f:facet name="output">
-								<p:outputLabel for="name" value="#{product.name}" />
-							</f:facet>
-							<p:outputPanel id="productName">
-								<p:inputText id="name" value="#{product.name}"
-									style="width:100%" label="Name" />
-							</p:outputPanel>
-						</p:column>
-						<p:column headerText="Status">
-							<f:facet name="output">
-								<h:outputText value="#{product.inventoryStatus}" />
-							</f:facet>
-							<p:outputPanel id="productStatus">
-								<h:selectOneMenu id="inventoryStatus"
-									value="#{product.inventoryStatus}" style="width:100%">
-									<f:selectItems value="#{data.bean.inventoryStatusList}"
-										var="status" itemLabel="#{status.text}" itemValue="#{status}" />
-
-								</h:selectOneMenu>
-								<h:message for="inventoryStatus" style="color: red;" />
-							</p:outputPanel>
-						</p:column>
-
-						<p:column headerText="Price">
-							<f:facet name="output">
-								<h:outputText value="#{product.price}">
-									<f:convertNumber type="currency" currencySymbol="$" />
-								</h:outputText>
-							</f:facet>
-							<p:outputPanel id="productPrice">
-								<p:inputNumber value="#{product.price}" label="Price" symbol="$">
-								</p:inputNumber>
-							</p:outputPanel>
-						</p:column>
-					</p:dataTable>
 					<div class="command-btns">
 						<p:commandButton value="Save" process="@form"
-							actionListener="#{logic.save}" update="@form" />
+							update="@form" actionListener="#{logic.saveProducts}" />
+					</div>
+				</div>
+			</h:form>
+
+
+			<h:form id="form2">
+				<p:growl id="msgs" showDetail="true" />
+				<div class="card">
+					<ic:table.validation.component.TableView
+						validatorId="componentUpdatedValidator"
+						title="Validation message show base on component updated"
+						products="#{data.bean.products2}" />
+					<div class="command-btns">
+						<p:commandButton value="Save"
+							process="form2" update="form2:msgs" actionListener="#{logic.saveProducts2}" />
 					</div>
 				</div>
 

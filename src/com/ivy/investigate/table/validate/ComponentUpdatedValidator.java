@@ -7,8 +7,10 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator("productCodeValidatorr")
-public class ProductCodeValidator implements Validator{
+import org.primefaces.PrimeFaces;
+
+@FacesValidator("componentUpdatedValidator")
+public class ComponentUpdatedValidator implements Validator{
 
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		String message = null;
@@ -19,8 +21,10 @@ public class ProductCodeValidator implements Validator{
 		}
 		
 		if(message != null) {
-			FacesMessage msg = new FacesMessage("Product code validation failed.", message);
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			
+			PrimeFaces.current().ajax().update(component.getClientId());
+		
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Product code validation failed.", message);
 			throw new ValidatorException(msg);	
 		}		
 	}
