@@ -7,8 +7,8 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator("formUpdatedValidator")
-public class FormUpdatedValidator implements Validator{
+@FacesValidator("productValidator")
+public class ProductValidator implements Validator{
 
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		String message = null;

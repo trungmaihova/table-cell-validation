@@ -12,6 +12,7 @@ public class ProductBean {
 
 	private List<Product> products1 = Collections.emptyList();
 	private List<Product> products2 = Collections.emptyList();
+	private List<Product> products3 = Collections.emptyList();
 
 	private ProductService service;
 
@@ -19,6 +20,7 @@ public class ProductBean {
 		this.service = new ProductService();
 		this.products1 = this.service.getClonedProducts(2);
 		this.products2 = this.service.getClonedProducts(2);
+		this.products3 = this.service.getClonedProducts(2);
 	}
 
 	public List<Product> getProducts1() {
@@ -29,7 +31,10 @@ public class ProductBean {
 		return products2;
 	}
 
-
+	public List<Product> getProducts3() {
+		return products3;
+	}
+	
 	public InventoryStatus[] getInventoryStatusList() {
 		return InventoryStatus.values();
 	}

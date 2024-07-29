@@ -15,7 +15,7 @@
 				<div class="card">
 
 					<ic:table.validation.component.TableView
-						validatorId="formUpdatedValidator"
+						validatorId="productValidator"
 						title="Validation message show base on form updated"
 						products="#{data.bean.products1}" />
 
@@ -39,7 +39,17 @@
 							process="form2" update="form2:msgs" actionListener="#{logic.saveProducts2}" />
 					</div>
 				</div>
-
+			</h:form>
+			
+			<h:form id="form3">
+				<p:growl id="msgs" showDetail="true" />
+				<div class="card">
+					<ic:table.validation.component.TableViewWithAjax
+						validatorId="productValidator"
+						title="Validation message show base on component updated"
+						products="#{data.bean.products3}" 
+						updateId="form3:msgs"/>					
+				</div>
 			</h:form>
 
 		</ui:define>
