@@ -6,24 +6,35 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.RowEditEvent;
+import org.primefaces.PrimeFaces;
 
 public class ProductBean {
 
-	private List<Product> products = Collections.emptyList();
+	private List<Product> products1 = Collections.emptyList();
+	private List<Product> products2 = Collections.emptyList();
+	private List<Product> products3 = Collections.emptyList();
 
 	private ProductService service;
 
 	public void init() {
 		this.service = new ProductService();
-		this.products = this.service.getClonedProducts(10);
+		this.products1 = this.service.getClonedProducts(2);
+		this.products2 = this.service.getClonedProducts(2);
+		this.products3 = this.service.getClonedProducts(2);
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public List<Product> getProducts1() {
+		return products1;
+	}
+	
+	public List<Product> getProducts2() {
+		return products2;
 	}
 
+	public List<Product> getProducts3() {
+		return products3;
+	}
+	
 	public InventoryStatus[] getInventoryStatusList() {
 		return InventoryStatus.values();
 	}
@@ -32,24 +43,14 @@ public class ProductBean {
 		this.service = service;
 	}
 
-	public void onRowEdit(RowEditEvent<Product> event) {
-		FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject().getCode()));
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+	public void saveProducts() {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Products1 is saved", null);
+		FacesContext.getCurrentInstance().addMessage(null, msg);	
 	}
-
-	public void onRowCancel(RowEditEvent<Product> event) {
-		FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject().getCode()));
+	
+	public void saveProducts2() {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Products2 is saved", null);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-
-	public void onCellEdit(CellEditEvent event) {
-		Object oldValue = event.getOldValue();
-		Object newValue = event.getNewValue();
-
-		if (newValue != null && !newValue.equals(oldValue)) {
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
-					"Old: " + oldValue + ", New:" + newValue);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-		}
+		PrimeFaces.current().ajax().update("form2");
 	}
 }

@@ -10,73 +10,45 @@
 		<ui:define name="title">TableValidation</ui:define>
 		<ui:define name="content">
 
-
-			<h:form id="form">
+			<h:form id="form1">
 				<p:growl id="msgs" showDetail="true" />
-
 				<div class="card">
-					<h5>Cell Editing with Double Click Event (dblclick)</h5>
-					<p:dataTable id="products3" var="product"
-						value="#{data.bean.products}" editable="true" editMode="cell"
-						widgetVar="cellCars2" editInitEvent="dblclick"
-						style="margin-bottom:20px">
 
-						<p:ajax event="cellEdit" listener="#{data.bean.onCellEdit}"
-							update=":form:msgs" />
+					<ic:table.validation.component.TableView
+						validatorId="productValidator"
+						title="Validation message show base on form updated"
+						products="#{data.bean.products1}" />
 
-						<p:column headerText="Code">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{product.code}" />
-								</f:facet>
-								<f:facet name="input">
-									<p:inputText id="modelInput3" value="#{product.code}"
-										style="width:100%" />
-								</f:facet>
-							</p:cellEditor>
-						</p:column>
+					<div class="command-btns">
+						<p:commandButton value="Save" process="@form"
+							update="@form" actionListener="#{logic.saveProducts}" />
+					</div>
+				</div>
+			</h:form>
 
-						<p:column headerText="Name">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{product.name}" />
-								</f:facet>
-								<f:facet name="input">
-									<p:inputText value="#{product.name}" style="width:100%"
-										label="Name" />
-								</f:facet>
-							</p:cellEditor>
-						</p:column>
 
-						<p:column headerText="Status">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{product.inventoryStatus}" />
-								</f:facet>
-								<f:facet name="input">
-									<h:selectOneMenu value="#{product.inventoryStatus}"
-										style="width:100%">
-										<f:selectItems value="#{data.bean.inventoryStatusList}"
-											var="status" itemLabel="#{status.text}" itemValue="#{status}" />
-									</h:selectOneMenu>
-								</f:facet>
-							</p:cellEditor>
-						</p:column>
-
-						<p:column headerText="Price">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{product.price}">
-										<f:convertNumber type="currency" currencySymbol="$" />
-									</h:outputText>
-								</f:facet>
-								<f:facet name="input">
-									<p:inputNumber value="#{product.price}" style="width:100%"
-										label="Price" symbol="$" />
-								</f:facet>
-							</p:cellEditor>
-						</p:column>
-					</p:dataTable>
+			<h:form id="form2">
+				<p:growl id="msgs" showDetail="true" />
+				<div class="card">
+					<ic:table.validation.component.TableView
+						validatorId="componentUpdatedValidator"
+						title="Validation message show base on component updated"
+						products="#{data.bean.products2}" />
+					<div class="command-btns">
+						<p:commandButton value="Save"
+							process="form2" update="form2:msgs" actionListener="#{logic.saveProducts2}" />
+					</div>
+				</div>
+			</h:form>
+			
+			<h:form id="form3">
+				<p:growl id="msgs" showDetail="true" />
+				<div class="card">
+					<ic:table.validation.component.TableViewWithAjax
+						validatorId="productValidator"
+						title="Validation message show base on component updated"
+						products="#{data.bean.products3}" 
+						updateId="form3:msgs"/>					
 				</div>
 			</h:form>
 
